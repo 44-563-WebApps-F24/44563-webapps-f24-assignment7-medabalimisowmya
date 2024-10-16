@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title> Building List with Divs</title>
+    <style>
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            background-color: red;
+        }
+
+        .flex-container > div {
+            background-color: #f1f1f1;
+            margin: 10px;
+            padding: 20px;
+            font-size: 30px;
+        }
+
+        /* Responsive layout */
+        @media (max-width: 600px) {
+            .flex-container {
+                flex-direction: column;
+                background-color: green;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Sowmya Medabalimi Builds List with Divs</h2>
+    <div class="flex-container" id="target">
+        <div class="divlist">row item 1</div>
+        <div class="divlist">row item 2</div>
+        <div class="divlist">row item 3</div>
+    </div>
+    
+    <p>Press the button to create a new element of type div and then add it to the container.</p>
+    <input type="text" id="inputItem" placeholder="Enter item text">
+    <button onclick="addEnd()">Add End</button>
+    
+    <script>
+        function addEnd() {
+            const inputValue = document.getElementById('inputItem').value;
+
+            let newDiv = document.createElement("div");
+            newDiv.innerHTML = inputValue; 
+            newDiv.className = "divlist"; 
+
+            let container = document.getElementById('target');
+            container.appendChild(newDiv);
+
+            document.getElementById('inputItem').value = '';
+
+            let items = document.getElementsByClassName('divlist');
+            if (items.length > 3) {
+                const middleIndex = Math.floor(items.length / 2);
+                items[middleIndex].remove(); 
+            }
+        }
+    </script>
+</body>
+</html>
