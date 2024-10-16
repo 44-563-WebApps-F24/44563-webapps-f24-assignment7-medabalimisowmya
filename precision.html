@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>Can speed check</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #target, #counter {
+            font-size: 24px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Sowmya Medabalimi speed check</h2>
+    <div id="target">Your time: 0 ms</div>
+    <div id="counter">Count: 0</div>
+    <button id="startButton">Start Timer</button>
+    <button id="stopButton">Stop Timer</button>
+
+    <script>
+        let stopTime;
+        let count = 0; 
+
+        function recordTime() {
+            stopTime = Date.now();
+            const elapsedTime = stopTime - startTime; 
+            document.getElementById('target').innerText = `Your time: ${elapsedTime} ms`;
+            console.log("Stop time recorded:", elapsedTime);
+        }
+
+        let startTime;
+        function startTimer() {
+            count++; 
+            document.getElementById('counter').innerText = `Count: ${count}`;
+            startTime = Date.now(); 
+            console.log("Start time recorded:", startTime);
+            const timeoutDuration = Math.floor(Math.random() * 3000) + 2000;
+            setTimeout(() => {
+                alert("Time's up! Click the Stop Timer button now.");
+            }, timeoutDuration);
+        }
+
+        document.getElementById("startButton").onclick = startTimer;
+        document.getElementById("stopButton").onclick = recordTime;
+    </script>
+</body>
+</html>
