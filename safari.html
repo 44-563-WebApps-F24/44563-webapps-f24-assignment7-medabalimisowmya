@@ -33,14 +33,21 @@
             margin-top: 20px;
         }
         .location {
-            width: 100px; /* Adjust as needed */
-            height: 100px; /* Adjust as needed */
+            width: 100px; 
+            height: 100px;
             overflow: hidden;
-            cursor: pointer; /* Show pointer cursor on hover */
+            cursor: pointer; 
+            position: relative; 
         }
         .location img {
-            width: 100%; /* Makes image responsive */
+            width: 100%; 
             height: auto;
+        }
+        .lion {
+            border: 5px solid red; 
+        }
+        .zebra {
+            border: 5px solid green; 
         }
     </style>
 </head>
@@ -53,9 +60,8 @@
     <div id="help" class="help-report">Help report</div>
     
     <div class="game-field">
-        <!-- Generate 6x6 grid of locations -->
         <div class="location" id="0" onclick="check(0)"><img src="Images/tree.jpeg" alt="Tree"></div>
-        <div class="location" id="1" onclick="check(1)"><img src="Images/tree.jpeg" alt="Tree"></div>
+        <div class="location zebra" id="1" onclick="check(1)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="2" onclick="check(2)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="3" onclick="check(3)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="4" onclick="check(4)"><img src="Images/tree.jpeg" alt="Tree"></div>
@@ -63,14 +69,14 @@
         
         <div class="location" id="6" onclick="check(6)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="7" onclick="check(7)"><img src="Images/tree.jpeg" alt="Tree"></div>
-        <div class="location" id="8" onclick="check(8)"><img src="Images/tree.jpeg" alt="Tree"></div>
+        <div class="location zebra" id="8" onclick="check(8)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="9" onclick="check(9)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="10" onclick="check(10)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="11" onclick="check(11)"><img src="Images/tree.jpeg" alt="Tree"></div>
 
-        <div class="location" id="12" onclick="check(12)"><img src="Images/tree.jpeg" alt="Tree"></div>
+        <div class="location zebra" id="12" onclick="check(12)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="13" onclick="check(13)"><img src="Images/tree.jpeg" alt="Tree"></div>
-        <div class="location" id="14" onclick="check(14)"><img src="Images/tree.jpeg" alt="Tree"></div>
+        <div class="location lion" id="14" onclick="check(14)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="15" onclick="check(15)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="16" onclick="check(16)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="17" onclick="check(17)"><img src="Images/tree.jpeg" alt="Tree"></div>
@@ -79,7 +85,7 @@
         <div class="location" id="19" onclick="check(19)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="20" onclick="check(20)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="21" onclick="check(21)"><img src="Images/tree.jpeg" alt="Tree"></div>
-        <div class="location" id="22" onclick="check(22)"><img src="Images/tree.jpeg" alt="Tree"></div>
+        <div class="location zebra" id="22" onclick="check(22)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="23" onclick="check(23)"><img src="Images/tree.jpeg" alt="Tree"></div>
 
         <div class="location" id="24" onclick="check(24)"><img src="Images/tree.jpeg" alt="Tree"></div>
@@ -93,41 +99,37 @@
         <div class="location" id="31" onclick="check(31)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="32" onclick="check(32)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="33" onclick="check(33)"><img src="Images/tree.jpeg" alt="Tree"></div>
-        <div class="location" id="34" onclick="check(34)"><img src="Images/tree.jpeg" alt="Tree"></div>
+        <div class="location zebra" id="34" onclick="check(34)"><img src="Images/tree.jpeg" alt="Tree"></div>
         <div class="location" id="35" onclick="check(35)"><img src="Images/tree.jpeg" alt="Tree"></div>
     </div>
 
     <script>
-        // JavaScript code for game functionality
-        let ids = Array.from(Array(36).keys()); // Unique IDs for each location
+        let ids = Array.from(Array(36).keys()); 
         let score = 0;
         let locationsVisited = 0;
-        let lastLocation = -1; // Initialize to -1 for no last location
+        let lastLocation = -1; 
         const zebraLocations = [1, 8, 12, 22, 34];
         const lionLocation = 14;
         let gameOver = false;
 
         function check(position) {
-            if (gameOver) return; // If the game is over, do nothing
+            if (gameOver) return; 
             
-            lastLocation = position; // Update last location
+            lastLocation = position; 
             const imageElement = document.getElementById(position);
             let imageSource;
 
-            // Determine the image based on the position
             if (position === lionLocation) {
-                imageSource = "Images/lion.jpeg"; // Image for lion
-                score -= 2; // Penalty for hitting the lion
-                gameOver = true; // Set game over
+                imageSource = "Images/lion.jpeg";
+                score -= 2; 
+                gameOver = true; 
             } else if (zebraLocations.includes(position)) {
-                imageSource = "Images/zebra.jpeg"; // Image for zebra
-                score += 4; // Reward for hitting a zebra
+                imageSource = "Images/zebra.jpeg"; 
+                score += 4; 
             } else {
-                imageSource = "Images/elephant.jpeg"; // Image for elephant
-                score += 1; // Reward for hitting an elephant
+                imageSource = "Images/elephant.jpeg"; 
+                score += 1; 
             }
-
-            // Update image and statistics
             imageElement.innerHTML = `<img src="${imageSource}" alt="Animal">`;
             locationsVisited++;
             updateUI();
