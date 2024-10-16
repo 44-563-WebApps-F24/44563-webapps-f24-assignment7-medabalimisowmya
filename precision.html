@@ -1,6 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Can speed check</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sowmya Medabalimi Speed Check</title>
     <style>
         body {
             display: flex;
@@ -15,41 +18,60 @@
             margin: 10px;
             padding: 10px 20px;
             font-size: 16px;
+            cursor: pointer;
         }
-        #target, #counter {
+        #target, #counter, #countdown {
             font-size: 24px;
             margin: 20px;
         }
     </style>
 </head>
 <body>
-    <h2>Sowmya Medabalimi speed check</h2>
+    <h2>Sowmya Medabalimi Speed Check</h2>
     <div id="target">Your time: 0 ms</div>
     <div id="counter">Count: 0</div>
+    <div id="countdown">Count: 5</div>
     <button id="startButton">Start Timer</button>
     <button id="stopButton">Stop Timer</button>
 
     <script>
         let stopTime;
         let count = 0; 
+        let startTime;
 
         function recordTime() {
             stopTime = Date.now();
             const elapsedTime = stopTime - startTime; 
-            document.getElementById('target').innerText = `Your time: ${elapsedTime} ms`;
+            if (elapsedTime < 0) {
+                document.getElementById('target').innerText = "Too Slow";
+            } else {
+                document.getElementById('target').innerText = `Your time: ${elapsedTime} ms`;
+            }
             console.log("Stop time recorded:", elapsedTime);
         }
 
-        let startTime;
         function startTimer() {
             count++; 
             document.getElementById('counter').innerText = `Count: ${count}`;
             startTime = Date.now(); 
             console.log("Start time recorded:", startTime);
-            const timeoutDuration = Math.floor(Math.random() * 3000) + 2000;
+
+            
+            for (let i = 0; i <= 4; i++) {
+                setTimeout(() => {
+                    document.getElementById('countdown').innerText = `Count: ${4 - i}`;
+                }, i * 1000); 
+            }
+
+            
             setTimeout(() => {
-                alert("Time's up! Click the Stop Timer button now.");
-            }, timeoutDuration);
+                if (stopTime === undefined) {
+                    document.getElementById('target').innerText = "Too Slow";
+                } else {
+                    const elapsedTime = stopTime - startTime;
+                    document.getElementById('target').innerText = `Your time: ${elapsedTime} ms`;
+                }
+            }, 5000); 
         }
 
         document.getElementById("startButton").onclick = startTimer;
