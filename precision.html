@@ -76,6 +76,32 @@
 
         document.getElementById("startButton").onclick = startTimer;
         document.getElementById("stopButton").onclick = recordTime;
+    
+        function startTime() {
+            stopTime = undefined;  
+
+            const countdownStart = Math.floor(Math.random() * 9) + 2;
+
+            
+            for (let i = countdownStart; i >= 0; i--) {
+                setTimeout(() => {
+                    document.getElementById('counter').innerHTML = i;
+                }, (countdownStart - i) * 1000);  
+            }
+
+  
+            setTimeout(() => {
+                if (stopTime === undefined) {
+                    document.getElementById('target').innerHTML = "Too Slow";
+                } else {
+                    const elapsedTime = Math.abs(Date.now() - stopTime);  
+                    document.getElementById('target').innerHTML = "Time was " + elapsedTime + " ms";
+                }
+            }, countdownStart * 1000);  
+        }
+
+        document.getElementById("startButton").onclick = startTime;
+        
     </script>
 </body>
 </html>
